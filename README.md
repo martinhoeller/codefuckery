@@ -30,6 +30,15 @@ By default it will count the words `fuck`, `shit` and `sorry` recursively in all
 $ codefuckery path/to/your/source
 ```
 
+Output:
+```
+  fuck: 4
+  shit: 12
+  sorry: 0
+
+Your code is a bit fucked up 💩
+```
+
 To limit the search to certain file types add the `--filetypes` parameter with a comma-delimited list of file extensions:
 
 ```
