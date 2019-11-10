@@ -1,6 +1,16 @@
 module Codefuckery
     class Counter
         def self.count(directory, filetypes, words, recursive)
+            if !File.exists?(directory)
+                puts "ERROR: '#{directory}' does not exist"
+                exit(-1)
+            end
+
+            if !File.directory?(directory)
+                puts "ERROR: '#{directory}' is not a directory"
+                exit(-1)
+            end
+
             paths = create_paths(directory, filetypes, recursive)
 
             if words == nil || words.empty?
