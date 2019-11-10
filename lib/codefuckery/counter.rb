@@ -2,7 +2,7 @@ module Codefuckery
     class Counter
         def self.count(directory, filetypes, words, recursive)
             paths = create_paths(directory, filetypes, recursive)
-            
+
             word_counts = {}
             words.each { |w| word_counts[w] = 0 }
             paths.each { |p| count_in_file(p, words, word_counts) }
@@ -14,20 +14,27 @@ module Codefuckery
         def self.create_paths(directory, filetypes, recursive)
             expanded_directory = File.expand_path(directory)
             pattern = recursive ? '**/*' : '**'
-            Dir["#{expanded_directory}/#{pattern}"].reject { |fn| 
-                basename = File.basename(fn)
-                if ['..', '.', '.git', '__MACOSX', '.DS_Store'].include? basename
-                    return true
-                end
+            Dir["#{expanded_directory}/#{pattern}"].select { |fn| should_include(fn, filetypes) }
+        end
 
-                extension = File.extname(fn).strip.downcase
-                should_reject = false
-                if !filetypes.empty?
-                    should_reject = extension.empty? || !(filetypes.include? extension)
-                end
+        private
+        def self.should_include(file, filetypes)
+            basename = File.basename(file)
+            if ['..', '.', '.git', '__MACOSX', '.DS_Store'].include? basename
+                return false
+            end
 
-                should_reject
-            }
+            if File.directory?(file)
+                return false
+            end
+
+            extension = File.extname(file).strip.downcase
+            should_include = true
+            if !filetypes.empty?
+                should_include = !extension.empty? && (filetypes.include? extension)
+            end
+
+            should_include
         end
 
         # shit
@@ -39,7 +46,7 @@ module Codefuckery
 
         private
         def self.print_results(word_counts)
-            word_counts.each { |word,count| puts "#{word}: #{count}" }
+            word_counts.each { |word,count| puts "  #{word}: #{count}" }
         end
     end
 end
