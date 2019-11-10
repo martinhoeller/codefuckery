@@ -14,9 +14,9 @@ Gem::Specification.new do |s|
     s.homepage    = 'https://github.com/martinhoeller/codefuckery'
     s.license     = 'MIT'
 
-    s.files       = `git ls-files -z`.split("\x0").reject { |f|
-        f.match(%r{^(test|spec|features)/})
-    }
+    s.files       = `git ls-files -z`.split("\x0")
     s.require_paths = ['lib']
     s.executables = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
+
+    s.add_dependency 'clamp', '~> 1.3'
 end

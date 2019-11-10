@@ -1,5 +1,1 @@
-class Codefuckery
-    def self.hi
-      puts "Hello world!"
-    end
-end
+require "codefuckery/version"

@@ -1,4 +1,15 @@
 #!/usr/bin/env ruby
 
+require 'clamp'
 require 'codefuckery'
-puts Codefuckery.hi
+
+Clamp do
+
+    option ["--version", "-v"], :flag, "shows codefuckery version" do
+        puts "codefuckery #{Codefuckery::VERSION}"
+        exit(0)
+    end
+
+    def execute
+    end
+end
