@@ -33,7 +33,7 @@ module Codefuckery
         # shit
         private
         def self.count_in_file(file, words, word_counts)
-            data = File.read(file)            
+            data = File.read(file).force_encoding("ISO-8859-1").encode("utf-8", replace: nil)
             words.each { |w| word_counts[w] += data.scan(/#{w}/).count }
         end
 
