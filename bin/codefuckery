@@ -4,12 +4,22 @@ require 'clamp'
 require 'codefuckery'
 
 Clamp do
+    parameter "DIRECTORY", "Source directory to be checked", :attribute_name => :directory
+    
+    option ["--filetypes", "-f"], "FILETYPES", "Comma-delimited list of file types, e.g. 'rb,java,swift'. By default all files are checked." do |s|
+        s.split(/\s*,\s*/)
+    end
 
-    option ["--version", "-v"], :flag, "shows codefuckery version" do
+    option ["--[no-]recursive"], :flag, "Recursively check files in DIRECTORY and all sub-directories.", default: true
+
+    option ["--version", "-v"], :flag, "Shows codefuckery version" do
         puts "codefuckery #{Codefuckery::VERSION}"
         exit(0)
     end
 
     def execute
+        puts "Checking files in #{directory}"
+        puts "File types: #{filetypes}"
+        puts "Recursive: #{recursive?}"
     end
 end
