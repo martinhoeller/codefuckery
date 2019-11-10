@@ -5,9 +5,13 @@ require_relative '../lib/codefuckery'
 
 Clamp do
     parameter "DIRECTORY", "Source directory to be checked", :attribute_name => :directory
-    
+
     option ["--filetypes", "-f"], "FILETYPES", "Comma-delimited list of file types, e.g.: rb,java,swift. By default all files are checked.", default: '' do |s|
         s.split(/\s*,\s*/).map { |ext| ".#{ext}"}
+    end
+
+    option ["--words", "-w"], "WORDS", "Comma-delimited list of words to count, e.g.: fixme,fuck,refactor. (default: \"fuck,shit,sorry\")" do |s|
+        s.split(/\s*,\s*/)
     end
 
     option ["--[no-]recursive"], :flag, "Recursively check files in DIRECTORY and all sub-directories.", default: true
@@ -18,7 +22,6 @@ Clamp do
     end
 
     def execute
-        #TODO configurable word list
-        counter = Codefuckery::Counter.count(directory, filetypes, Codefuckery::DEFAULT_WORDS, recursive?)
+        counter = Codefuckery::Counter.count(directory, filetypes, words, recursive?)
     end
 end

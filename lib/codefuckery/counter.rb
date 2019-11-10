@@ -3,6 +3,10 @@ module Codefuckery
         def self.count(directory, filetypes, words, recursive)
             paths = create_paths(directory, filetypes, recursive)
 
+            if words == nil || words.empty?
+                words = Codefuckery::DEFAULT_WORDS
+            end
+
             word_counts = {}
             words.each { |w| word_counts[w] = 0 }
             paths.each { |p| count_in_file(p, words, word_counts) }
