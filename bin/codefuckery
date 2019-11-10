@@ -1,13 +1,13 @@
 #!/usr/bin/env ruby
 
 require 'clamp'
-require 'codefuckery'
+require_relative '../lib/codefuckery'
 
 Clamp do
     parameter "DIRECTORY", "Source directory to be checked", :attribute_name => :directory
     
-    option ["--filetypes", "-f"], "FILETYPES", "Comma-delimited list of file types, e.g. 'rb,java,swift'. By default all files are checked." do |s|
-        s.split(/\s*,\s*/)
+    option ["--filetypes", "-f"], "FILETYPES", "Comma-delimited list of file types, e.g.: rb,java,swift. By default all files are checked.", default: '' do |s|
+        s.split(/\s*,\s*/).map { |ext| ".#{ext}"}
     end
 
     option ["--[no-]recursive"], :flag, "Recursively check files in DIRECTORY and all sub-directories.", default: true
@@ -18,8 +18,7 @@ Clamp do
     end
 
     def execute
-        puts "Checking files in #{directory}"
-        puts "File types: #{filetypes}"
-        puts "Recursive: #{recursive?}"
+        #TODO configurable word list
+        counter = Codefuckery::Counter.count(directory, filetypes, Codefuckery::DEFAULT_WORDS, recursive?)
     end
 end
