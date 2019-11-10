@@ -50,7 +50,18 @@ module Codefuckery
 
         private
         def self.print_results(word_counts)
-            word_counts.each { |word,count| puts "  #{word}: #{count}" }
+            total_count = 0
+            word_counts.each { |word,count|
+                puts "  #{word}: #{count}"
+                total_count += count
+            }
+
+            puts ""
+            if total_count == 0
+                puts "You have a wholesome codebase 🙏"
+            else
+                puts "Your code is a bit fucked up 💩"
+            end
         end
     end
 end
