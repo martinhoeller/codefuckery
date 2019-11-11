@@ -19,4 +19,6 @@ Gem::Specification.new do |s|
     s.executables = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
 
     s.add_dependency 'clamp', '~> 1.3'
+    s.add_development_dependency 'rake'
+    s.add_development_dependency 'minitest'
 end
