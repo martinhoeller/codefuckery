@@ -3,6 +3,7 @@
 Find out how fucked up your code is.
 
 [![Build Status](https://travis-ci.com/martinhoeller/codefuckery.svg?token=KWVpavqFr8Za2Z8HmJKj&branch=master)](https://travis-ci.com/martinhoeller/codefuckery)
+[![Gem Version](https://badge.fury.io/rb/codefuckery.svg)](https://badge.fury.io/rb/codefuckery)
 
 ## Installation
 
