@@ -22,6 +22,28 @@ Clamp do
     end
 
     def execute
-        counter = Codefuckery::Counter.count(directory, filetypes, words, recursive?)
+        word_counts = Codefuckery::Counter.count(directory, filetypes, words, recursive?)
+
+        if word_counts == nil
+            exit(-1)
+        end
+
+        print_results(word_counts)
+    end
+
+    private
+    def print_results(word_counts)
+        total_count = 0
+        word_counts.each { |word,count|
+            puts "  #{word}: #{count}"
+            total_count += count
+        }
+
+        puts ""
+        if total_count == 0
+            puts "You have a wholesome codebase 🙏"
+        else
+            puts "Your code is a bit fucked up 💩"
+        end
     end
 end
