@@ -2,6 +2,8 @@
 
 Find out how fucked up your code is.
 
+[![Build Status](https://travis-ci.com/martinhoeller/codefuckery.svg?token=KWVpavqFr8Za2Z8HmJKj&branch=master)](https://travis-ci.com/martinhoeller/codefuckery)
+
 ## Installation
 
 Add this line to your application's Gemfile:
